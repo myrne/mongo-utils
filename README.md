@@ -1,10 +1,8 @@
-mongo-utils: Utilities for managing MongoDB databases
-=====================================================
+# mongo-utils: Utilities for managing MongoDB databases
 
-Mongo-utils provides a somewhat sane interface to MongoDB's mongodump and mongorestore commands.
+A friendly interface to MongoDB's mongodump and mongorestore commands.
 
-Asynchronous
-------------
+## Asynchronous
 
 ```coffee
 utils.dumpDatabase connectionString, dirName, (err) ->
@@ -13,15 +11,13 @@ utils.restoreDatabase connectionString, dirName, (err) ->
 utils.dumpHerokuMongoHQDatabase appName, dirName, (err) ->
 ```
 
-Synchronous
------------
+## Synchronous
 
 ```coffee
 utils.parseConnectionString connectionString
 ```
 
-Prerequisites
--------------
+## Prerequisites
 
 You need to have mongorestore and mongodump in your path.
-The Heroku specific functions require a ```HEROKU_API_KEY``` environment variable to be set.
+The Heroku-specific functions require a ```HEROKU_API_KEY``` environment variable to be set.
