@@ -14,6 +14,7 @@ engines:
 
 optionalDependencies: {}
 author: "Meryn Stol <merynstol@gmail.com>"
+homepage: "https://github.com/meryn/mongo-utils"
 repository:
   type: "git"
   url: "git://github.com/meryn/mongo-utils.git"
