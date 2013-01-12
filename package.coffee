@@ -1,6 +1,5 @@
 name: "mongo-utils"
 version: "0.1.0"
-private: true
 main: "lib/utils.js"
 dependencies:
   heroku: "0.0.6"
