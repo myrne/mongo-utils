@@ -1,6 +1,8 @@
 mongo-utils: Utilities for managing MongoDB databases
 =====================================================
 
+Mongo-utils provides a somewhat sane interface to MongoDB's mongodump and mongorestore commands.
+
 Asynchronous
 ------------
 
