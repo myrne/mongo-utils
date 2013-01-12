@@ -1,5 +1,6 @@
 name: "mongo-utils"
-version: "0.1.1"
+keywords: ["mongodb","mongodump","mongorestore","heroku","mongohq"]
+version: "0.1.2"
 directories:
   lib: "./lib"
 main: "lib/utils.js"
