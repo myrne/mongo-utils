@@ -3,6 +3,8 @@ parseURL = require('url').parse
 heroku = require 'heroku'
 fs = require 'fs'
 
+MSON = require 'mongoson'
+
 module.exports = utils = {}
 utils.parseConnectionString = (connectionString) ->
   parsedURL = parseURL connectionString
@@ -64,6 +66,13 @@ utils.findHerokuMongoHQURL = (appName, next) ->
     return next err if err
     return next "Cannot find MONGOHQ_URL in config of #{appName}." unless herokuConfig.MONGOHQ_URL
     return next null, herokuConfig.MONGOHQ_URL
+
+utils.makeFindCommand = (collectionName, query, options = {}) ->
+  command  = "db.#{collectionName}.find(#{MSON.stringify query}"
+  command += ",#{JSON.stringify options.fields}" if options.fields
+  command += ")"
+  command += ".sort(#{JSON.stringify options.sort})" if options.sort
+  command
 
 makeCommandOptions = (connParams) ->
   options = {}

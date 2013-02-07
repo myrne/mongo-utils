@@ -8,16 +8,17 @@
     "heroku",
     "mongohq"
   ],
-  "version": "0.1.3",
+  "version": "0.2.0",
   "directories": {
     "lib": "./lib"
   },
   "main": "lib/utils.js",
   "dependencies": {
-    "heroku": "0.0.6"
+    "heroku": "0.0.6",
+    "mongoson": "0.0.4"
   },
   "devDependencies": {
-    "coffee-script": "1.3.x"
+    "coffee-script": "1.4.x"
   },
   "engines": {
     "node": "0.8.x",
@@ -31,6 +32,8 @@
     "url": "git://github.com/meryn/mongo-utils.git"
   },
   "scripts": {
-    "prepublish": "cake build"
+    "prepublish": "npm test",
+    "pretest": "cake build",
+    "test": "coffee ./test/utils.coffee"
   }
 }
