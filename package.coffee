@@ -1,7 +1,7 @@
 name: "mongo-utils"
 description: "A friendly interface to MongoDB's mongodump and mongorestore commands."
 keywords: ["mongodb","mongodump","mongorestore","heroku","mongohq"]
-version: "0.2.0"
+version: "0.2.1"
 directories:
   lib: "./lib"
 main: "lib/utils.js"
