@@ -6,6 +6,12 @@ fs = require 'fs'
 MSON = require 'mongoson'
 
 module.exports = utils = {}
+utils.log = ->
+  
+utils.loggedExec = (command, next) ->
+  utils.log "> #{command}"
+  exec command, next
+
 utils.parseConnectionString = (connectionString) ->
   parsedURL = parseURL connectionString
   info = {}
@@ -21,20 +27,20 @@ utils.dumpDatabase = (connectionString, dirName, next) ->
   commandOptions = makeCommandOptions connectionParameters
   commandOptions.out = dirName
   commandArguments = makeCommandArguments commandOptions
-  console.log argumentString = makeArgumentString commandArguments
-  exec "mongodump#{argumentString}", (err, stdOut, stdErr) ->
+  argumentString = makeArgumentString commandArguments
+  utils.loggedExec "mongodump#{argumentString}", (err, stdOut, stdErr) ->
     return next err if err
     return next null, stdOut, stdErr
 
 utils.restoreDatabase = (connectionString, dirName, next) ->
   utils.findDumpDirName dirName, (err, actualDirName) ->
-    console.log "Using #{actualDirName}"
+    utils.log "Using #{actualDirName}"
     connectionParameters = utils.parseConnectionString connectionString
     commandOptions = makeCommandOptions connectionParameters
     commandOptions.drop = true
     commandArguments = makeCommandArguments commandOptions, actualDirName
-    console.log argumentString = makeArgumentString commandArguments
-    exec "mongorestore#{argumentString}", (err, stdOut, stdErr) ->
+    argumentString = makeArgumentString commandArguments
+    utils.loggedExec "mongorestore#{argumentString}", (err, stdOut, stdErr) ->
       return next err if err
       return next null, stdOut, stdErr
 
