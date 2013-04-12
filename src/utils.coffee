@@ -53,7 +53,7 @@ utils.findDumpDirName = (dirName, next) ->
   switch dirCount
     when 0 then next null, dirName # a proper dump dir
     when 1 then next null, dirName + "/" + lastDirName # assume this one is proper
-    else next "Dump dir contains multiple directories."
+    else next new Error "Dump dir contains multiple directories."
   
 utils.dumpHerokuMongoHQDatabase = (appName, dirName, next) ->
   utils.findHerokuMongoHQURL appName, (err, url) ->
@@ -66,11 +66,11 @@ utils.restoreHerokuMongoHQDatabase = (appName, dirName, next) ->
     return utils.restoreDatabase url, dirName, next
 
 utils.findHerokuMongoHQURL = (appName, next) ->
-  return next "Cannot find environment variable HEROKU_API_KEY" unless process.env['HEROKU_API_KEY']
+  return next new Error "Cannot find environment variable HEROKU_API_KEY" unless process.env['HEROKU_API_KEY']
   herokuClient = new heroku.Heroku key: process.env['HEROKU_API_KEY']
   herokuClient.get_config_vars appName, (err, herokuConfig) ->
     return next err if err
-    return next "Cannot find MONGOHQ_URL in config of #{appName}." unless herokuConfig.MONGOHQ_URL
+    return next new Error "Cannot find MONGOHQ_URL in config of #{appName}." unless herokuConfig.MONGOHQ_URL
     return next null, herokuConfig.MONGOHQ_URL
 
 utils.makeFindCommand = (collectionName, query, options = {}) ->
