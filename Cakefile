@@ -7,6 +7,6 @@ task 'build', 'Build lib from src', ->
       throw new Error err if err
 
 task 'watch', 'Auto-build and notify', -> 
-  watcher = spawn "coffee", ["--watch","--require","coffeescript-growl","--compile","--output","lib/","src/"]
+  watcher = spawn "coffee", ["--watch","--compile","--output","lib/","src/"]
   watcher.stderr.pipe(process.stderr)
   watcher.stdout.pipe(process.stdout)    
