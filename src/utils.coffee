@@ -112,5 +112,5 @@ makeCommandArguments = (options, object) ->
 
 makeArgumentString = (args) ->
   str = ""
-  str += " \"#{arg}\"" for arg in args
+  str += " '#{arg}'" for arg in args
   str
