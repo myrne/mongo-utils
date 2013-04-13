@@ -23,37 +23,49 @@ utils.parseConnectionString = (connectionString) ->
   info
 
 utils.dumpDatabase = (connectionString, dirName, next) ->
+  dumpCommand = utils.makeDumpCommand connectionString, dirName
+  utils.loggedExec dumpCommand, (err, stdOut, stdErr) ->
+    return next err if err
+    return next null, stdOut, stdErr
+
+utils.restoreDatabase = (connectionString, dirName, next) ->
+  restoreCommand = utils.makeRestoreCommand connectionString, dirName
+  utils.loggedExec restoreCommand, (err, stdOut, stdErr) ->
+    return next err if err
+    return next null, stdOut, stdErr
+
+utils.makeDumpCommand = (connectionString, dirName) ->
+  throw "No target directory given." unless dirName 
+  throw "Target directory must be a string" unless typeof dirName is "string"
   connectionParameters = utils.parseConnectionString connectionString
   commandOptions = makeCommandOptions connectionParameters
   commandOptions.out = dirName
   commandArguments = makeCommandArguments commandOptions
   argumentString = makeArgumentString commandArguments
-  utils.loggedExec "mongodump#{argumentString}", (err, stdOut, stdErr) ->
-    return next err if err
-    return next null, stdOut, stdErr
+  "mongodump#{argumentString}"
 
-utils.restoreDatabase = (connectionString, dirName, next) ->
-  utils.findDumpDirName dirName, (err, actualDirName) ->
-    utils.log "Using #{actualDirName}"
-    connectionParameters = utils.parseConnectionString connectionString
-    commandOptions = makeCommandOptions connectionParameters
-    commandOptions.drop = true
-    commandArguments = makeCommandArguments commandOptions, actualDirName
-    argumentString = makeArgumentString commandArguments
-    utils.loggedExec "mongorestore#{argumentString}", (err, stdOut, stdErr) ->
-      return next err if err
-      return next null, stdOut, stdErr
+utils.makeRestoreCommand = (connectionString, dirName) ->
+  throw "No source directory given." unless dirName 
+  throw "Source directory must be a string" unless typeof dirName is "string"
+  actualDirName = utils.findDumpDirName dirName
+  utils.log "Using #{actualDirName}"
+  connectionParameters = utils.parseConnectionString connectionString
+  commandOptions = makeCommandOptions connectionParameters
+  commandOptions.drop = true
+  commandArguments = makeCommandArguments commandOptions, actualDirName
+  argumentString = makeArgumentString commandArguments
+  "mongorestore#{argumentString}"
 
-utils.findDumpDirName = (dirName, next) ->
+utils.findDumpDirName = (dirName) ->
   dirCount = 0
   for entryName in fs.readdirSync dirName
     if fs.statSync("#{dirName}/#{entryName}").isDirectory()
       dirCount += 1 
       lastDirName = entryName
   switch dirCount
-    when 0 then next null, dirName # a proper dump dir
-    when 1 then next null, dirName + "/" + lastDirName # assume this one is proper
-    else next new Error "Dump dir contains multiple directories."
+    when 0 then return dirName # a proper dump dir
+    when 1 then return dirName + "/" + lastDirName # assume this one is proper
+    else throw new Error "#{dirName} contains multiple directories."
   
 utils.dumpHerokuMongoHQDatabase = (appName, dirName, next) ->
   utils.findHerokuMongoHQURL appName, (err, url) ->
