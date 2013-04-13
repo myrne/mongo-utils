@@ -29,3 +29,8 @@ The heroku-mongohq functions look up the `MONGOHQ_URL` environment variable of y
 
 For the commands to work, you need to have `mongorestore` and `mongodump` in your path.  
 The Heroku-specific commands require a `HEROKU_API_KEY` environment variable to be set.
+
+## License
+
+mongo-utils is released under the [MIT License](http://opensource.org/licenses/MIT).  
+Copyright (c) 2013 Meryn Stol
