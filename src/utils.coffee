@@ -69,11 +69,13 @@ utils.findDumpDirName = (dirName) ->
   
 utils.dumpHerokuMongoHQDatabase = (appName, dirName, next) ->
   utils.findHerokuMongoHQURL appName, (err, url) ->
+    utils.log "Using #{url}"
     return next err if err
     return utils.dumpDatabase url, dirName, next
 
 utils.restoreHerokuMongoHQDatabase = (appName, dirName, next) ->
   utils.findHerokuMongoHQURL appName, (err, url) ->
+    utils.log "Using #{url}"
     return next err if err
     return utils.restoreDatabase url, dirName, next
 
