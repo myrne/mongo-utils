@@ -14,11 +14,12 @@
   },
   "main": "lib/utils.js",
   "dependencies": {
-    "heroku": "0.0.6",
+    "heroku": "0.0.7",
     "mongoson": "0.0.4"
   },
   "devDependencies": {
-    "coffee-script": "1.4.x"
+    "coffee-script": "1.4.x",
+    "mocha": "~1.9.0"
   },
   "engines": {
     "node": "0.8.x",
@@ -34,6 +35,6 @@
   "scripts": {
     "prepublish": "npm test",
     "pretest": "cake build",
-    "test": "coffee ./test/utils.coffee"
+    "test": "make test"
   }
 }
