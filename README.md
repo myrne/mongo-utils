@@ -2,15 +2,15 @@
 
 mongo-utils provides a friendly interface to MongoDB's mongodump and mongorestore commands, as well as some utility functions.
 
-## Synchronous
-
+## Synchronous functions
+ 
 ```coffee
 utils.parseConnectionString connectionString # mongo connection options object
 utils.makeRestoreCommand connectionString, sourceDir # mongorestore ...
 utils.makeDumpCommand connectionString, targetDir # mongodump ...
 ```
 
-## Asynchronous
+## Asynchronous functions
 
 These functions simply wrap [`child_process.exec`](http://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback) in a convenient interface. There is absolutely no validation happening. Thus, the absensce of an error (as `err` argument) does not mean the dump or restore succeeded.
 
