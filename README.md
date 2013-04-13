@@ -1,4 +1,4 @@
-# mongo-utils
+# mongo-utils [![Build Status](https://travis-ci.org/meryn/mongo-utils.png?branch=master)](https://travis-ci.org/meryn/mongo-utils)
 
 mongo-utils provides a friendly interface to MongoDB's mongodump and mongorestore commands, as well as some utility functions.
 
