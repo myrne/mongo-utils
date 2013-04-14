@@ -12,7 +12,7 @@ utils.makeDumpCommand connectionString, targetDir # mongodump ...
 
 ## Asynchronous functions
 
-These functions simply wrap [`child_process.exec`](http://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback) in a convenient interface. There is absolutely no validation happening. Thus, the absensce of an error (as `err` argument) does not mean the dump or restore succeeded.
+These functions simply wrap [`child_process.exec`](http://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback) in a convenient interface. There is absolutely no validation happening. Thus, the absence of an error (as `err` argument) does not mean the dump or restore succeeded.
 
 I advise to inspect `stdout` and `stderr` yourself if you use this module for any important dumps or restores, or verify the results otherwise.
 
