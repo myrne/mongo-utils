@@ -15,7 +15,7 @@
   "main": "lib/utils.js",
   "dependencies": {
     "heroku": "0.0.7",
-    "mongoson": "0.0.4"
+    "mongoson": "0.1.x"
   },
   "devDependencies": {
     "coffee-script": "1.6.x",
