@@ -22,6 +22,15 @@ utils.parseConnectionString = (connectionString) ->
   [info.username,info.password] = parsedURL.auth.split(':') if parsedURL.auth
   info
 
+utils.getConnectionInfo = (connectionString) ->
+  info = utils.parseConnectionString connectionString
+  info = {}
+  info.protocol = info.protocol or "mongodb"
+  info.hostname = info.hostname or "localhost"
+  info.port = info.port or 27017
+  info.host = if info.port then "#{info.hostname}:#{info.port}" else info.hostname
+  info
+
 utils.dumpDatabase = (connectionString, dirName, next) ->
   dumpCommand = utils.makeDumpCommand connectionString, dirName
   utils.loggedExec dumpCommand, (err, stdOut, stdErr) ->
