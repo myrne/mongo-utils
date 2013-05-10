@@ -1,6 +1,6 @@
 {
   "name": "mongo-utils",
-  "description": "A friendly interface to MongoDB's mongodump and mongorestore commands.",
+  "description": "Friendly interface to mongodump and mongorestore commands.",
   "keywords": [
     "mongodb",
     "mongodump",
