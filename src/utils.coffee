@@ -44,8 +44,8 @@ utils.restoreDatabase = (connectionString, dirName, next) ->
     return next null, stdOut, stdErr
 
 utils.makeDumpCommand = (connectionString, dirName) ->
-  throw "No target directory given." unless dirName 
-  throw "Target directory must be a string" unless typeof dirName is "string"
+  throw new Error "No target directory given." unless dirName 
+  throw new Error "Target directory must be a string" unless typeof dirName is "string"
   connectionParameters = utils.parseConnectionString connectionString
   commandOptions = makeCommandOptions connectionParameters
   commandOptions.out = dirName
@@ -54,8 +54,8 @@ utils.makeDumpCommand = (connectionString, dirName) ->
   "mongodump#{argumentString}"
 
 utils.makeRestoreCommand = (connectionString, dirName) ->
-  throw "No source directory given." unless dirName 
-  throw "Source directory must be a string" unless typeof dirName is "string"
+  throw new Error "No source directory given." unless dirName 
+  throw new Error "Source directory must be a string" unless typeof dirName is "string"
   actualDirName = utils.findDumpDirName dirName
   utils.log "Using #{actualDirName}"
   connectionParameters = utils.parseConnectionString connectionString
