@@ -1,5 +1,7 @@
 # mongo-utils [![Build Status](https://travis-ci.org/meryn/mongo-utils.png?branch=master)](https://travis-ci.org/meryn/mongo-utils)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/braveg1rl/mongo-utils.svg)](https://greenkeeper.io/)
+
 mongo-utils provides a friendly interface to MongoDB's mongodump and mongorestore commands, as well as some utility functions.
 
 ## Synchronous functions
